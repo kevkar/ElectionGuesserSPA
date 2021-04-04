@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Election Guesser</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+
+    
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header" style="background-color: black;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a style="font-size: 24px;" class="navbar-brand" th:href="@{/}">Election Guesser</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li th:classappend="${module == 'home' ? 'active' : ''}">
+              <a href="#" th:href="@{/about}">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+<body>
+    
+  <div>
+   <img class="kevinpic" th:src="@{/css/kevinpic.jpg}" alt = "Image not found!!!" >
+ </div>
+
+  <div class="aboutText">
+   <p > My name is Kevin Karch and I'm a senior at the University of Florida graduating May 2021. This project combines my interest in data,
+     web development, and U.S. elections. It's built using a Java Spring Boot/MySQL/Hibernate backend and a HTML/CSS/JS front-end with Thymeleaf. All code is
+     posted at the link below. 
+     </p>
+  </div>
+
+  <div class="links">
+    <h3>
+      <a href="https://github.com/kevkar/ElectionGuesser" target="_blank">My GitHub</a>
+    </h3>
+  </div>
+  
+ </body>
+</html>

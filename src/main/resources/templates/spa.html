@@ -1,0 +1,380 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Election Guesser</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+
+<!-- Thyemeleaf header template taken from thymeleaf.org-->    
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header" style="background-color: black;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a style="font-size: 24px;" class="navbar-brand" th:href="@{/}">Election Guesser</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li th:classappend="${module == 'home' ? 'active' : ''}">
+              <a href="#" th:href="@{/about}">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+</div>
+
+<!-- Instructions appear once on front page-->   
+	<div id= "instructions">
+		<h4 class="instructions">
+			 Guess the results of the past three presidential elections in a random county. <br>
+			 Click 'Start' to see a random county and its statistics. <br>
+		</h4>
+	</div>
+
+<!-- Start and next buttons repopulate the DOM with a new county-->   
+	<div id="startButton" class="purps">
+		<button class="button button3" onclick="removeAll(); getStuff();">Start!</button>
+	</div>
+
+<body class = "body">
+
+	<div id="name" class="CountyName"></div>
+	<div id="statarea" class="CountyName"></div>
+
+	<div class="content">
+		<div id="imager" class="imgbox"></div>
+		<div id="info" class="info"></div>
+	</div>
+
+	<div class="purps">	
+		<div id="nextButton"> </div>
+		<div id="graphButton"> </div>
+	</div>
+
+	<div id="allbuttons">
+			<div id="year2008" class="year2008"> </div>
+			
+			<div id="buttons2012" class="buttons2012" ></div>
+			<div id="buttons2016" class="buttons2016"></div>
+			<div id="buttons2020" class="buttons2020"></div>
+	</div>
+
+	<div id="resultsOnClicked">
+		<div id="result2012" class = "year20"></div>
+		<div id="result2016" class = "year20"></div>
+		<div id="result2020" class = "year20"></div>
+	</div>
+
+ 	<div id="chartContainer" class="charter"></div>
+
+</body>
+</html>
+
+	<script>
+		// all elements fetched when 'next' button is clicked
+		function getStuff() {
+        fetch('/api/random')
+            .then(function (response) {
+				return response.json();})
+            .then(function (data) {
+				addAll(data);})
+            .catch(function (err) {
+				console.log('Error: ' + err);
+			});
+        function addAll(data) {
+
+			makeCountyName(data);
+
+			makeStatArea(data);
+
+			makeImage(data);
+			
+			makeStats(data);
+
+			make2008results(data);
+
+			makeButtons("buttons2012","year2012","2012",2012,data.random2012,data.marg_2012,"result2012",data.result2012,buttons2012);
+	
+			makeButtons("buttons2016","year2016","2016",2016,data.random2016,data.marg_2016,"result2016",data.result2016,buttons2016);
+
+			makeButtons("buttons2020","year2020","2020",2020,data.random2020,data.marg_2020,"result2020",data.result2020,buttons2020);
+
+			makeNextButton();
+			
+			makeGraphButton(data);
+		}
+	}
+	</script>
+
+	<script>
+
+		function makeCountyName(data)
+		{
+			var namer = document.getElementById("name");
+            var div = document.createElement("div");
+            div.innerHTML = data.name + ', ' + data.state;
+			namer.appendChild(div);
+		}
+
+		function makeStatArea(data)
+		{
+			var stater = document.getElementById("statarea");
+			var div = document.createElement("div");
+			div.innerHTML = data.realStatArea;
+			stater.appendChild(div);
+		}
+
+		function makeImage(data)
+		{
+			var imager = document.getElementById("imager");
+			var img = document.createElement("img");
+			img.src = data.imageURL;
+			img.classList.add("img");
+			img.alt = "Image not found!!!";
+			imager.appendChild(img);
+		}
+
+		function makeStats(data)
+		{
+			var info = document.getElementById("info");
+			var div = document.createElement("div");
+			div.innerHTML = "Population: " + data.formattedPop + '<br>' +
+							"Poverty Rate: " + data.pov_rate + '<br>' +
+							"Avg Income: $" + data.hh_inc + '<br>' +
+							"No High School: " + data.per_no_hs + '%' + '<br>' +
+							"High School Only: " + data.per_hs_only + '%' + '<br>' +
+							"Some College: " + data.per_sc + '%' + '<br>' +
+							"Bachelors or More: " + data.per_bach + '%' + '<br>';
+			info.appendChild(div);
+		}
+
+		function make2008results(data)
+		{
+			var year2008 = document.getElementById("year2008");
+			var div = document.createElement("div");
+			div.innerHTML = "2008 Result: " + data.result2008;
+			year2008.appendChild(div);
+		}
+
+		function makeButtons(div,div2,stringYear,intYear,guessArray,correct,result,text,div3)
+		{
+			makeButtonInfo(div,div2,stringYear);
+			for (var i = 0; i < 4; i++)
+				makeOneButton(intYear,guessArray[i],correct, div, result, text, div3);
+		}
+			
+		function makeButtonInfo(element,id,year)
+		{
+			var button = document.getElementById(element);
+			var doc = document.createElement(id);
+			doc.innerHTML = year + ": ";
+			doc.classList.add("year");
+			button.appendChild(doc);
+		}
+
+		function makeGraph(data)
+		{
+			document.getElementById('year2008').innerHTML = "";
+			document.getElementById('buttons2012').innerHTML = "";
+			document.getElementById('buttons2016').innerHTML = "";
+			document.getElementById('buttons2020').innerHTML = "";
+			makeChart(data.name,data.state,data.result2008,data.result2012,data.result2016,data.result2020,
+					 data.realMargin2008,data.realMargin2012,data.realMargin2016,data.realMargin2020);
+		}
+
+		function makeOneButton(year,yeardata,answer,elemFrom,elemTo,resultText,buttonCLass)
+		{
+			var button = document.createElement("button");
+			button.innerHTML = getWinner(year,yeardata);
+			button.classList.add("button")
+			button.classList.add(yeardata > 0? "button1" : "button2");
+			button.onclick = function () {
+				getYearResult(resultText,answer * 100,yeardata,elemTo,year);
+				document.getElementById(elemFrom).innerHTML = document.getElementById(elemTo).innerHTML;
+			};		
+			buttonCLass.appendChild(button);
+		}
+
+
+
+		function getYearResult(resultText,correct,guessed,element,year)
+		{
+			var result = document.getElementById(element);
+			var h2 = document.createElement("h2");
+			var imager = document.createElement("img");
+			imager.classList.add("year20after");
+			imager.src= appearImage(correct,guessed);
+			imager.classList.add("smallImage");
+			imager.alt="Small Image not found!!!";
+			h2.classList.add("year20after");
+			h2.innerHTML = year + " Result: " + resultText;
+			result.appendChild(h2);
+			result.appendChild(imager);
+		}
+		
+		function appearImage(correct,guessed)
+		{
+			if (correct != guessed)
+				return "/css/redx.png";
+			return "/css/greencheck.png";
+		}
+
+		function makeNextButton()
+		{
+
+			var nextButton = document.getElementById("nextButton");
+			var nexter = document.createElement("button");
+			nexter.classList.add("button");
+			nexter.classList.add("button3");
+			nexter.innerHTML ="Next";
+			nexter.onclick= function() {
+				removeAll();
+				getStuff();
+			};
+			nextButton.appendChild(nexter);
+		}
+
+		function makeGraphButton(data)
+		{
+			var graphButton = document.getElementById("graphButton");
+			var grapher = document.createElement("button");
+			grapher.classList.add("button");
+			grapher.classList.add("button3");
+			grapher.innerHTML ="Graph";
+			graphButton.onclick = function() {
+				makeGraph(data);};
+			graphButton.appendChild(grapher);
+		}
+
+
+		function getWinner(year,amount)
+		{
+			var winner = "";
+			switch(year) {
+				case 2012:
+					if (amount > 0) 
+						winner = "Obama";
+					else
+						winner = "Romney";
+					break;
+				case 2016:
+					if (amount > 0)
+						winner = "Clinton";
+					else
+						winner = "Trump";
+					break;
+				case 2020:
+					if (amount > 0)
+						winner = "Biden";
+					else
+						winner = "Trump";
+					break;
+			}
+			margin = amount > 0? amount : -amount;
+			return winner + ' +' + margin;
+		}
+	</script>
+	
+	<script>
+
+	function removeAll()
+		{
+			document.getElementById('nextButton').innerHTML = "";
+			document.getElementById('graphButton').innerHTML = "";
+			document.getElementById('instructions').innerHTML = "";
+			document.getElementById('startButton').innerHTML = "";
+			document.getElementById('name').innerHTML = "";
+			document.getElementById('statarea').innerHTML = "";
+			document.getElementById('imager').innerHTML = "";
+			document.getElementById('info').innerHTML = "";
+			document.getElementById('year2008').innerHTML = "";
+			document.getElementById('buttons2012').innerHTML = "";
+			document.getElementById('buttons2016').innerHTML = "";
+			document.getElementById('buttons2020').innerHTML = "";
+			document.getElementById('result2012').innerHTML = "";
+			document.getElementById('result2016').innerHTML = "";
+			document.getElementById('result2020').innerHTML = "";
+			document.getElementById('chartContainer').innerHTML = "";
+		}
+	</script>
+
+<script th:inline="javascript">
+ function makeChart(countyName, countyState, result2008, result2012, result2016, result2020,
+ 					margin2008, margin2012, margin2016, margin2020) {
+
+			var color2008 = margin2008 > 0? "blue" : "red";
+			var color2012 = margin2012 > 0? "blue" : "red";
+			var color2016 = margin2016 > 0? "blue" : "red";
+			var color2020 = margin2020 > 0? "blue" : "red";
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	animationDuration: 1500,
+	theme: "light2",
+	title:{
+		text: "County Results" /*countyName + ", " + countyState */ ,
+		titleFontFamily: "sans-serif" ,
+		fontColor: "green" ,
+		fontSize: 35 ,
+		fontWeight: "lighter" ,
+		horizontalAlign: "center" ,
+		verticalAlign: "top" ,
+		padding: 20
+	},
+	axisX:{
+		title: "Election Year" ,
+		titleFontColor: "purple",
+		titleFontFamily: "sans-serif" ,
+		titleFontWeight: "bold" ,
+		valueFormatString: "YYYY" ,
+		labelAngle: -50 ,
+		margin: 10 ,		
+		titleFontSize: 25 ,
+		labelFontSize: 20,
+		labelFontColor: "black" ,
+		labelAngle: 0 ,
+		tickcolor: "red",
+		
+	},
+	axisY:{
+		title: "Democratic Margin" ,
+		titleFontColor: "purple",
+		titleFontFamily: "sans-serif" ,
+		titleFontWeight: "bold" ,
+		margin: 10 ,
+		titleFontSize: 25 ,
+	},
+	
+	toolTip: {
+		enabled: false ,
+	},
+
+	data: [{        
+		type: "spline",
+      	indexLabelFontSize: 16,
+      	lineThickness: 1.25,
+		dataPoints: [
+			{ x: new Date(2008,0,1), y: margin2008, indexLabel: result2008, markerSize: 10, 
+				markerColor: color2008, indexLabelFontColor: color2008, indexLabelFontWeight: "bold"},
+			{ x: new Date(2012,0,1), y: margin2012, indexLabel: result2012, markerSize: 10,
+					markerColor: color2012, indexLabelFontColor: color2012, indexLabelFontWeight: "bold"},
+			{ x: new Date(2016,0,1), y: margin2016, indexLabel: result2016, markerSize: 10,
+					markerColor: color2016, indexLabelFontColor: color2016, indexLabelFontWeight: "bold"},
+			{ x: new Date(2020,0,1), y: margin2020, indexLabel: result2020, markerSize: 10,
+					 markerColor: color2020,indexLabelFontColor: color2020, indexLabelFontWeight: "bold"}
+		]
+	}]
+});
+chart.render();
+}
+ 
+</script>
