@@ -7,7 +7,7 @@ Click on "Graph" to see the result in graph form after you're done guessing
 
 <img src="https://i.imgur.com/zUjA4p2.png" width="650" height="650">
 
-Known issues and upcoming changes:
+<h2>Known issues and upcoming changes<h2>
 Alaska is missing! ALaska data was weird because its counties changed a lot.
 Mobile does not look great.
 On rare occasions, it will mark your guess wrong when it's actually right. 
