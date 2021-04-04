@@ -16,5 +16,5 @@ Click on "Graph" to see the result in graph form after you're done guessing
 </ul>  
 
 <h2>Build Info</h2>
-This single-page web app was made with a Java Spring Boot, MySQL, and Hibernate backend. Frontend was done using Thymeleaf and HTML/CSS/JavaScript. Testing was done with JUnit graphs are in CanvasJS, app hosted on heroku.
+This single-page web app was made with a Java Spring Boot, MySQL, and Hibernate backend. Frontend in Thymeleaf and HTML/CSS/JavaScript. Tested with JUnit, graphed in CanvasJS, hosted on heroku.
 
