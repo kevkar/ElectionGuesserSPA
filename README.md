@@ -9,12 +9,12 @@ Click on "Graph" to see the result in graph form after you're done guessing
 
 <h2>Known issues and upcoming changes</h2>
 <ul>
-  <li>Alaska is missing! ALaska data was weird because its counties change often.</li>
+  <li>Alaska is missing! Alaska data was weird because its counties change often.</li>
   <li>Mobile does not look great.</li>
   <li>On rare occasions, it will mark your guess wrong when it's actually right. </li>
-  <li>Guesses are sometimes too easy - randomizer is OK not great.</li>
+  <li>Guesses are sometimes too easy - randomizer needs improvement.</li>
 </ul>  
 
-
-
+<h2>Build Info</h2>
+This single-page web app was made with a Java Spring Boot, MySQL, and Hibernate backend. Frontend was done using Thymeleaf and HTML/CSS/JavaScript. Testing was done with JUnit graphs are in CanvasJS, app hosted on heroku.
 
