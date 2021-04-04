@@ -1,4 +1,4 @@
 # ElectionGuesserSPA
 Welcome to the election guesser! Look at a random county in the United States, its location, and some statistics to guess the results of the past three presidential elections. 
 
-![samplecounty](https://i.imgur.com/Sx1rhKE.png = 100x100)
+<img src="https://i.imgur.com/Sx1rhKE.png" width="100" height="100">
