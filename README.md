@@ -1,5 +1,5 @@
 # ElectionGuesser Single-page Application
-Welcome to the election guesser! Look at a random county in the United States, its location, and some statistics to guess the results of the past three presidential elections. Check it out here https://www.electionguesser.com/
+Welcome to the election guesser! Look at a random county in the United States, its location, and some statistics to guess the results of the past three presidential elections. Check it out at https://www.electionguesser.com/
 
 <img src="https://i.imgur.com/Sx1rhKE.png" width="650" height="650">
 
