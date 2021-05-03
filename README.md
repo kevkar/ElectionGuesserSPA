@@ -16,5 +16,5 @@ Click on "Graph" to see the result in graph form.
 </ul>  
 
 <h2>Build Info</h2>
-This single-page web app was made with a Java Spring Boot, MySQL, and Hibernate backend. Frontend in Thymeleaf and HTML/CSS/JavaScript. I cleaned the data with Python and Excel. Tested with JUnit, graphed in CanvasJS, hosted on heroku.
+This single-page web app was made with a Java Spring Boot, MySQL, and Hibernate backend. Frontend in Thymeleaf and HTML/CSS/JavaScript. I cleaned the data with Python and Excel. Dependency management with Maven, tested with JUnit, graphed in CanvasJS, and hosted on heroku.
 
