@@ -5,7 +5,7 @@ Welcome to the election guesser! Look at a random county in the United States, i
 
 Click on "Graph" to see the result in graph form.
 
-<img src="https://i.imgur.com/zUjA4p2.png" width="650" height="600">
+<img src="https://i.imgur.com/zUjA4p2.png" width="800" height="450">
 
 <h2>Known issues and upcoming changes</h2>
 <ul>
