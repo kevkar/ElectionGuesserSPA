@@ -18,3 +18,10 @@ Click on "Graph" to see the result in graph form.
 <h2>Build Info</h2>
 This single-page web app was made with a Java Spring Boot, MySQL, and Hibernate backend. Frontend in Thymeleaf and HTML/CSS/JavaScript. I cleaned the data with Python and Excel. Dependency management with Maven, tested with JUnit, graphed in CanvasJS, and hosted on heroku.
 
+<h2>Sources</h2>
+
+Data for 2008-2016 elections from the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ" target="_blank">MIT Election Data + Science Lab</a>
+<br>
+Data for 2020 election from <a href="https://github.com/tonmcg/US_County_Level_Election_Results_08-20" target="_blank">github</a> 
+<br>
+Images from Wikipedia using the <a href="https://chrome.google.com/webstore/detail/download-all-images/nnffbdeachhbpfapjklmpnmjcgamcdmm" target="_blank">Download All Images tool</a> 
