@@ -1,7 +1,6 @@
 package com.kevin.sp.ElectionGuesserSPA.rest;
 
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,11 +33,7 @@ public class CountyRC {
 	@GetMapping("/random")
 	public County getRandomCounty()
 	{
-		Random random = new Random();
-		List<County> counties = countyService.findAll();
-		int N = random.nextInt(counties.size()) + 1;
-		
-		return countyService.findById(N);
+		return countyService.getRandomCounty();
 	}
 	
 	@GetMapping("/counties/{_id}")
@@ -59,10 +54,5 @@ public class CountyRC {
 			res += c.getImageURL() + "\n";
 		
 		return res;
-	}
-	
-	
-	
-	
-	
+	}				
 }
