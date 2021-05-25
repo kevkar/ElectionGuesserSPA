@@ -54,5 +54,5 @@ public class CountyRC {
 			res += c.getImageURL() + "\n";
 		
 		return res;
-	}				
+	}
 }

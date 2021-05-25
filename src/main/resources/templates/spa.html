@@ -198,7 +198,7 @@
 			button.classList.add("button")
 			button.classList.add(yeardata > 0? "button1" : "button2");
 			button.onclick = function () {
-				getYearResult(resultText,answer * 100,yeardata,elemTo,year);
+				getYearResult(resultText,answer,yeardata,elemTo,year);
 				document.getElementById(elemFrom).innerHTML = document.getElementById(elemTo).innerHTML;
 			};		
 			buttonCLass.appendChild(button);
@@ -311,10 +311,10 @@
  function makeChart(countyName, countyState, result2008, result2012, result2016, result2020,
  					margin2008, margin2012, margin2016, margin2020) {
 
-			var color2008 = margin2008 > 0? "blue" : "red";
-			var color2012 = margin2012 > 0? "blue" : "red";
-			var color2016 = margin2016 > 0? "blue" : "red";
-			var color2020 = margin2020 > 0? "blue" : "red";
+			var color2008 = result2008 > 0? "blue" : "red";
+			var color2012 = result2012 > 0? "blue" : "red";
+			var color2016 = result2016 > 0? "blue" : "red";
+			var color2020 = result2020 > 0? "blue" : "red";
 
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,

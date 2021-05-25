@@ -8,10 +8,9 @@ import java.util.TreeSet;
 public class Guessed {
 	
 	// return the random array of four values for 'guessed' buttons
-	public static ArrayList<Integer> getRandomArray(double double_margin)
+	public static ArrayList<Integer> getRandomArray(int marg_2012)
 	{
-		int margin = (int)(double_margin * 100);
-		ArrayList<Integer> res = new ArrayList<>(getRandom1(margin));
+		ArrayList<Integer> res = new ArrayList<>(getRandom1(marg_2012));
 		return res;
 	}
 	
@@ -54,5 +53,4 @@ public class Guessed {
         }
         return randomSet;
     }
-
 }

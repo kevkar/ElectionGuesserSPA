@@ -52,24 +52,24 @@ public class County {
 	private int per_bach;
 	
 	@Column(name="marg_2008")
-	private double marg_2008;
+	private int marg_2008;
 
 	@Column(name="marg_2012")
-	private double marg_2012;
+	private int marg_2012;
 	
 	@Column(name="marg_2016")
-	private double marg_2016;
+	private int marg_2016;
 	
 	@Column(name="marg_2020")
-	private double marg_2020;
+	private int marg_2020;
 	
 	// must have default constructor
 	public County() {}
 
 	// all attributes that are in database must be here
 	public County(int id, int fips, String state, String name, String stat_area, int pop, String pov_rate,
-			String hh_inc, int per_no_hs, int per_hs_only, int per_sc, int per_bach, double marg_2008, double marg_2012,
-			double marg_2016, double marg_2020) {
+			String hh_inc, int per_no_hs, int per_hs_only, int per_sc, int per_bach, int marg_2008, int marg_2012,
+			int marg_2016, int marg_2020) {
 		this.id = id;
 		this.fips = fips;
 		this.state = state;
@@ -95,33 +95,33 @@ public class County {
 			return "Nearly Tied!";
 		
 		if (marg_2008 < 0)
-			return "McCain by " + (int)(marg_2008 * -100) + "";
+			return "McCain by " + (marg_2008 * -1) + "";
 
-		return "Obama by " + (int)(marg_2008 * 100) + "";
+		return "Obama by " + marg_2008 + "";
 	}
 	
 	public String getresult2012()
 	{
 		if (marg_2012 < 0)
-			return "Romney by " + (int)(marg_2012 * -100) + "";
+			return "Romney by " + (marg_2012 * -1) + "";
 		
-		return "Obama by " + (int)(marg_2012 * 100) + "";
+		return "Obama by " + marg_2012 + "";
 	}
 	
 	public String getresult2016()
 	{
 		if (marg_2016 < 0)
-			return "Trump by " + (int)(marg_2016 * -100) + "";
+			return "Trump by " + (marg_2016 * -1) + "";
 		
-		return "Clinton by " + (int)(marg_2016 * 100) + "";
+		return "Clinton by " + marg_2016 + "";
 	}
 	
 	public String getresult2020()
 	{
 		if (marg_2020 < 0)
-			return "Trump by " + (int)(marg_2020 * -100) + "";
+			return "Trump by " + (marg_2020 * -1) + "";
 		
-		return "Biden by " + (int)(marg_2020 * 100) + "";
+		return "Biden by " + marg_2020 + "";
 	}
 	
 	// getting image is its own class
@@ -149,22 +149,22 @@ public class County {
 	// getting the margin for each year in integer form 
 	public int getRealMargin2008()
 	{
-		return (int)(marg_2008 * 100);
+		return (int)(marg_2008);
 	}
 	
 	public int getRealMargin2012()
 	{
-		return (int)(marg_2012 * 100);
+		return (int)(marg_2012);
 	}
 	
 	public int getRealMargin2016()
 	{
-		return (int)(marg_2016 * 100);
+		return (int)(marg_2016);
 	}
 	
 	public int getRealMargin2020()
 	{
-		return (int)(marg_2020 * 100);
+		return (int)(marg_2020);
 	}
 
 	// if margin is less than 0, Republic won
@@ -304,7 +304,7 @@ public class County {
 		return marg_2008;
 	}
 
-	public void setMarg_2008(double marg_2008) {
+	public void setMarg_2008(int marg_2008) {
 		this.marg_2008 = marg_2008;
 	}
 
@@ -312,7 +312,7 @@ public class County {
 		return marg_2012;
 	}
 
-	public void setMarg_2012(double marg_2012) {
+	public void setMarg_2012(int marg_2012) {
 		this.marg_2012 = marg_2012;
 	}
 
@@ -320,7 +320,7 @@ public class County {
 		return marg_2016;
 	}
 
-	public void setMarg_2016(double marg_2016) {
+	public void setMarg_2016(int marg_2016) {
 		this.marg_2016 = marg_2016;
 	}
 
@@ -328,7 +328,7 @@ public class County {
 		return marg_2020;
 	}
 
-	public void setMarg_2020(double marg_2020) {
+	public void setMarg_2020(int marg_2020) {
 		this.marg_2020 = marg_2020;
 	}
 
