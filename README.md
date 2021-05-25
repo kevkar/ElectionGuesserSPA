@@ -11,7 +11,6 @@ Click on "Graph" to see the result in graph form.
 <ul>
   <li>Alaska is missing! Alaska data is weird because its counties change often.</li>
   <li>Mobile does not look great.</li>
-  <li>On rare occasions, it will mark your guess wrong when it's actually right. </li>
   <li>Guesses are sometimes too easy - randomizer needs improvement.</li>
 </ul>  
 
